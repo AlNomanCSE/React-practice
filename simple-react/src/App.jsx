@@ -5,42 +5,42 @@ const pizzaData = [
     name: "Focaccia",
     ingredients: "Bread with italian olive oil and rosemary",
     price: 6,
-    photoName: "pizzas/focaccia.jpg",
+    photoName: "images/focaccia.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Margherita",
     ingredients: "Tomato and mozarella",
     price: 10,
-    photoName: "pizzas/margherita.jpg",
+    photoName: "images/margherita.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Spinaci",
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
-    photoName: "pizzas/spinaci.jpg",
+    photoName: "images/spinaci.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Funghi",
     ingredients: "Tomato, mozarella, mushrooms, and onion",
     price: 12,
-    photoName: "pizzas/funghi.jpg",
+    photoName: "images/funghi.jpg",
     soldOut: false,
   },
   {
     name: "Pizza Salamino",
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
-    photoName: "pizzas/salamino.jpg",
+    photoName: "images/salamino.jpg",
     soldOut: true,
   },
   {
     name: "Pizza Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
-    photoName: "pizzas/prosciutto.jpg",
+    photoName: "images/prosciutto.jpg",
     soldOut: false,
   },
 ];
@@ -57,35 +57,37 @@ function Menu() {
   return (
     <>
       <h2 className="menu">Our Menu</h2>
-      <Pizza
+      <ul>
+        {pizzaData.map((pizza, index) => (
+          <Pizza
+            key={index}
+            photoName={pizza.photoName}
+            name={pizza.name}
+            ingredients={pizza.ingredients}
+            price={pizza.price}
+          />
+          
+        ))}
+      </ul>
+
+      {/* <Pizza
         name="Pizza Prosciutto"
         ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
         price={18}
         photoName="images/prosciutto.jpg"
-      />
-      <Pizza
-        name="Pizza Salamino"
-        ingredients="Tomato, mozarella, and pepperoni"
-        price={15}
-        photoName="images/salamino.jpg"
-      />
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mozarella, mushrooms, and onion"
-        price={12}
-        photoName="images/funghi.jpg"
-      />
+      /> */}
     </>
   );
 }
 function Pizza(props) {
+  console.log(props);
   return (
-    <div className="pizzaProfile">
+    <li className="pizzaProfile">
       <img src={props.photoName} alt="pizza photo" />
       <h1>{props.name}</h1>
       <p>{props.ingredients}</p>
       Price:<span>{props.price}</span>
-    </div>
+    </li>
   );
 }
 
