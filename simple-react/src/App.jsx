@@ -20,14 +20,14 @@ const pizzaData = [
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
     photoName: "images/spinaci.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     name: "Pizza Funghi",
     ingredients: "Tomato, mozarella, mushrooms, and onion",
     price: 12,
     photoName: "images/funghi.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     name: "Pizza Salamino",
@@ -65,42 +65,66 @@ function Menu() {
             name={pizza.name}
             ingredients={pizza.ingredients}
             price={pizza.price}
+            soldOut={pizza.soldOut}
           />
-          
         ))}
       </ul>
-
-      {/* <Pizza
-        name="Pizza Prosciutto"
-        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-        price={18}
-        photoName="images/prosciutto.jpg"
-      /> */}
     </>
   );
 }
 function Pizza(props) {
-  console.log(props);
   return (
     <li className="pizzaProfile">
       <img src={props.photoName} alt="pizza photo" />
       <h1>{props.name}</h1>
       <p>{props.ingredients}</p>
-      Price:<span>{props.price}</span>
+      <span>{props.soldOut ? `Sold Out` : `Price: ${props.price}`}</span>
     </li>
   );
 }
-
+function Order({ open }) {
+  console.log(open);
+  return (
+    <>
+      <button
+        style={{
+          backgroundColor: "red",
+          padding: "5px",
+          fontSize: "2rem",
+          borderRadius: "5px",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Order
+      </button>
+    </>
+  );
+}
 function Footer() {
   const houre = new Date().getHours();
-  const oprenHours = 8;
+  const oprenHours = 12;
   const closeHours = 22;
   const isOpen = houre >= oprenHours && houre <= closeHours;
-  return (
-    <footer>
-      <strong>{isOpen.toString().toUpperCase()}</strong> We're Curently Open
-    </footer>
-  );
+  if (isOpen) {
+    return (
+      <footer>
+        <>
+          <strong>
+            <p>We are Open</p>
+          </strong>
+          <Order open={isOpen} />
+        </>
+      </footer>
+    );
+  } else {
+    return (
+      <>
+        <h1>We are Close Now!</h1>
+      </>
+    );
+  }
 }
 
 const App = () => {
