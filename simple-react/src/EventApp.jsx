@@ -12,17 +12,17 @@ const EventApp = () => {
 
   function hadleClickPrevious() {
     if (step > 1) {
-      setStep(step - 1);
+      setStep((s) => s - 1);
     }
   }
   function hadleClickNext() {
     if (step < 3) {
-      setStep(step + 1);
+      setStep((S) => S + 1);
     }
   }
   return (
     <>
-      <button onClick={() => setOpen(!isOpen)}>&times;</button>
+      <button onClick={() => setOpen((is) => !is)}>&times;</button>
       {isOpen && (
         <div className="container">
           <div className="middleCard">
