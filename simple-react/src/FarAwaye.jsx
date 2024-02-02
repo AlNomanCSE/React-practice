@@ -6,11 +6,18 @@ const initialItems = [
   { id: 3, decription: "Earpods", quantity: 3, packed: false },
 ];
 const FarAwaye = () => {
+  const [items, setItems] = useState([]);
+  function handelAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+  function handelDelete(id) {
+    setItems((items) => items.filter((item) => item.id != id));
+  }
   return (
     <>
       <Logo />
-      <Form />
-      <PackingList />
+      <Form onAdditems={handelAddItems} />
+      <PackingList items={items} onDeleteItem={handelDelete} />
       <Stats />
     </>
   );
@@ -19,14 +26,16 @@ const FarAwaye = () => {
 const Logo = () => {
   return <h1>Far Awaye </h1>;
 };
-const Form = () => {
+
+const Form = ({ onAdditems }) => {
   const [decription, setDecription] = useState("");
   const [quantity, setQuantity] = useState(1);
   function handleClick(e) {
     e.preventDefault();
     if (!decription) return;
-    const newItems = { decription, quantity, packed: false, id: Date.now() };
-    console.log(newItems);
+    const newItem = { decription, quantity, packed: false, id: Date.now() };
+    console.log(newItem);
+    onAdditems(newItem);
     setDecription("");
     setQuantity(1);
   }
@@ -53,26 +62,26 @@ const Form = () => {
     </form>
   );
 };
-const PackingList = () => {
+const PackingList = ({ items, onDeleteItem }) => {
   return (
     <>
       <h5>LIST</h5>
       <ul>
-        {initialItems.map((items, index) => (
-          <Item item={items} key={index} />
+        {items.map((item, index) => (
+          <Item item={item} onDeleteItem={onDeleteItem} key={index} />
         ))}
       </ul>
     </>
   );
 };
-const Item = ({ item }) => {
+const Item = ({ item, onDeleteItem }) => {
   return (
     <div>
       <li style={item.packed ? { textDecoration: "line-through" } : {}}>
         <span>
-          {item.decription} {item.quantity}
+          {item.quantity} {item.decription}
         </span>
-        <button>X</button>
+        <button onClick={() => onDeleteItem(item.id)}>X</button>
       </li>
     </div>
   );
