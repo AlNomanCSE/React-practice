@@ -7,18 +7,36 @@ const initialItems = [
 ];
 const FarAwaye = () => {
   const [items, setItems] = useState([]);
+  const itemNumers = items.length;
+  const packedItems = items.filter((item) => item.packed != false).length;
+  console.log(packedItems);
   function handelAddItems(item) {
     setItems((items) => [...items, item]);
   }
   function handelDelete(id) {
     setItems((items) => items.filter((item) => item.id != id));
   }
+  function handelToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id == id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+  function handelClear() {
+    setItems([]);
+  }
   return (
     <>
       <Logo />
       <Form onAdditems={handelAddItems} />
-      <PackingList items={items} onDeleteItem={handelDelete} />
-      <Stats />
+      <PackingList
+        items={items}
+        onToggleItems={handelToggleItem}
+        onDeleteItem={handelDelete}
+        onClearAll={handelClear}
+      />
+      <Stats totalItems={itemNumers} packedItems={packedItems} />
     </>
   );
 };
@@ -28,12 +46,12 @@ const Logo = () => {
 };
 
 const Form = ({ onAdditems }) => {
-  const [decription, setDecription] = useState("");
+  const [description, setDecription] = useState("");
   const [quantity, setQuantity] = useState(1);
   function handleClick(e) {
     e.preventDefault();
-    if (!decription) return;
-    const newItem = { decription, quantity, packed: false, id: Date.now() };
+    if (!description) return;
+    const newItem = { description, quantity, packed: false, id: Date.now() };
     console.log(newItem);
     onAdditems(newItem);
     setDecription("");
@@ -55,41 +73,81 @@ const Form = ({ onAdditems }) => {
       <input
         type="text"
         placeholder="Items ..."
-        value={decription}
+        value={description}
         onChange={(e) => setDecription(e.target.value)}
       />
       <button>Add</button>
     </form>
   );
 };
-const PackingList = ({ items, onDeleteItem }) => {
+const PackingList = ({ items, onDeleteItem, onToggleItems, onClearAll }) => {
+  const [sortBy, setSortBy] = useState("input");
+  let sortedList = [];
+  if (sortBy === "input") {
+    sortedList = items;
+  }
+  if (sortBy === "description") {
+    sortedList = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  }
+  if (sortBy === "packed") {
+    sortedList = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
+  }
   return (
     <>
       <h5>LIST</h5>
       <ul>
-        {items.map((item, index) => (
-          <Item item={item} onDeleteItem={onDeleteItem} key={index} />
+        {sortedList.map((item, index) => (
+          <Item
+            item={item}
+            onToggleItems={onToggleItems}
+            onDeleteItem={onDeleteItem}
+            key={index}
+          />
         ))}
       </ul>
+      <div>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="description">Sort by description</option>
+          <option value="input">Sort by input order</option>
+          <option value="packed">Sort by packed status</option>
+        </select>
+      </div>
+      <button onClick={onClearAll}>Clear list</button>
     </>
   );
 };
-const Item = ({ item, onDeleteItem }) => {
+const Item = ({ item, onDeleteItem, onToggleItems }) => {
   return (
     <div>
-      <li style={item.packed ? { textDecoration: "line-through" } : {}}>
-        <span>
-          {item.quantity} {item.decription}
+      <li>
+        <input
+          type="checkbox"
+          value={item.packed}
+          onClick={() => onToggleItems(item.id)}
+        />
+        <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+          {item.quantity} {item.description}
         </span>
         <button onClick={() => onDeleteItem(item.id)}>X</button>
       </li>
     </div>
   );
 };
-const Stats = () => {
+const Stats = ({ totalItems, packedItems }) => {
   return (
     <footer>
-      <em>You have X items on Your list, and you already packed X</em>
+      <em>
+        {totalItems == packedItems
+          ? totalItems == 0
+            ? "Start adding some items to your packing list"
+            : "You are readu to go..........."
+          : `You have-${totalItems} items on Your list, and you already packed-
+        ${packedItems}`}
+      </em>
     </footer>
   );
 };
