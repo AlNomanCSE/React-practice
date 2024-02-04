@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const App = () => {
+const key = "6ae144c0";
+const App = (prop) => {
+  const [count, setCount] = useState(0);
+  const [date, setDate] = useState(new Date());
+
+  async function showdata() {
+    let resposnse = await fetch(
+      `http://www.omdbapi.com/?apikey=${key}&s=Ironman`
+    );
+    let movie = await resposnse.json();
+    console.log(movie.Search);
+  }
+
+  function tick() {
+    setDate(new Date());
+  }
+  function addClick() {
+    setCount((prev) => prev + 1);
+  }
+  useEffect(() => {
+    console.log("Time");
+    const interval = setInterval(tick, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <>
-      <div
-        style={{
-          fontFamily: "Honk",
-          fontSize: "2rem",
-          textTransform: "capitalize",
-          letterSpacing:'2px'
-        }}
-      >
-        Hello App
-      </div>
-      <p style={{ fontSize: "12px", color: "#280274" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores quas
-        nemo dignissimos earum nostrum mollitia molestias. Saepe dolorum dolorem
-        optio cum repellat nam laborum eos eveniet, sequi temporibus vel hic.
+      <p>
+        Time : {date.toLocaleTimeString()}--{count}
       </p>
-      <h1>
-        hello
-      </h1>
+      <button onClick={addClick}>Click</button>
     </>
   );
 };

@@ -12,6 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <EventApp /> */}
     {/* <DateStaeCount/> */}
     {/* <FarAwaye/> */}
-    <App />
+    <App tp={1234} />
   </React.StrictMode>
 );
