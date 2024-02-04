@@ -1,52 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Economica|Roboto+Condensed');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  font-family: "Single Day", cursive;
-  background-color: bisque;
-
-}
-
-.header {
-  color: red;
+html,body {
+  margin: 5%;
   text-align: center;
-  text-transform: uppercase;
+  font-family: 'Economica', sans-serif;
 }
 
-.menu {
-  text-align: center;
-  position: relative;
+h1, h2, h3, h4, h5 {
+  font-family: 'Economica', sans-serif;
 }
 
-.menu::before,
-.menu::after {
-  content: "";
-  width: 100%;
-  background-color: black;
-  height: 2px;
-  display: block;
-  position: absolute;
-
+.form {
+  height: 25px;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
-.pizzaProfile {
-  margin: 10rem 5rem;
-  width:100%;
-  height: 30vh;
+input {
+  width: 300px;
+  height: 19px;
+  font-size: 16px;
+  margin: 1px;
+}
+
+.form > input {
+  float: left;
+}
+
+.form > button {
+  float: right;
+  margin: 1px;
+}
+
+button {
+  height: 25px;
+}
+
+.Gallery {
+  margin: 10px;
+}
+
+.Gallery > img {
+  width: 400px;
+  height: 25s0px;
+  z-index: -1;
+  opacity: 0.8;
+  object-fit: cover;
+}
+
+.multiform {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  margin: 5px;
 }
 
-img {
-  height: 100%;
+.multiform > div > input {
+  width: 40px;
+  font-size: 12px;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.multiform > div {
+  float: left;
+}
+
+.task-list {
+  cursor: pointer;
+}
+
+.completed-list {
+  color: grey;
+}
+
+.delete-task {
+  color: black;
+  cursor: pointer;
+}
+
+.Stories > div {
+  margin: 15px;
+}
+
+.Matrix > img {
+  width: 500px;
+  height: 500px;
   object-fit: cover;
+}
+
+.Jobs {
+  text-align: left;
 }
