@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import "./App.css";
 
+const initialState = 0;
+const reducer = (state, action) => {
+      
+};
 function App() {
+  useReducer(reducer, initialState);
+
+  // const inputRef = useRef(null);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // });
+
   return (
     <>
-      <h1>Develop in web</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias non
-        eligendi deleniti placeat tempora tempore consequuntur quaerat odit?
-        Nisi neque voluptatum, sit nostrum officia saepe explicabo fugit in!
-        Nam, repudiandae.
-      </p>
+  
     </>
   );
 }
