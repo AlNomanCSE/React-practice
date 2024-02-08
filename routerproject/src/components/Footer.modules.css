@@ -1,0 +1,12 @@
+.footer {
+    height: 20vh;
+    background-color: rgb(56, 56, 56);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footertext {
+    color: #fff;
+    opacity: .2;
+}
