@@ -1,0 +1,57 @@
+.imageDiv {
+    width: 100%;
+    height: 60vh;
+    background-image: url('../assets/Images/aboutimage.jpg');
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+
+}
+
+.textAndOthers {
+    height: 150vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 10rem 0 10rem;
+}
+
+.textAndOthers .tagline p {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(29, 28, 28);
+}
+
+.textLines {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.textAndOthers .textLines p {
+    padding: 2rem 0;
+    font-size: 1.7rem;
+}
+
+.boxDiv {
+    background-color: #FFCC8D;
+    border-radius: 5px;
+    padding: 5rem;
+}
+
+.boxDiv .sometext p {
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(29, 28, 28);
+    line-height: 35px;
+    padding-bottom: 3rem;
+}
+
+.boxDiv .btn {
+    border: none;
+    padding: 10px 20px;
+    background-color: #161616;
+    color: #a8a590;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
