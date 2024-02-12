@@ -1,21 +1,26 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import * as React from "react";
 import "./App.css";
+import {
+  RouterProvider,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import loader from "./Loderfunction.jsx";
 
-const initialState = 0;
-const reducer = (state, action) => {
-      
-};
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route
+      path="/"
+      loader={loader}
+      errorElement={<h1>Erro</h1>}
+    />
+  )
+);
 function App() {
-  useReducer(reducer, initialState);
-
-  // const inputRef = useRef(null);
-  // useEffect(() => {
-  //   inputRef.current.focus();
-  // });
-
   return (
     <>
-  
+      <RouterProvider router={router} />
     </>
   );
 }
