@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   margin: 0;
@@ -8,7 +8,7 @@
 
 html,
 body {
-  font-family: "Libre Baskerville", serif;
-  font-size: 62.5%;
-  background-color: cadetblue;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  background-color: rgb(38, 41, 41);
 }

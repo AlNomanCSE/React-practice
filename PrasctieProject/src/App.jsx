@@ -7,14 +7,11 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import loader from "./Loderfunction.jsx";
+import Home from "./Home.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      loader={loader}
-      errorElement={<h1>Erro</h1>}
-    />
+    <Route path="/" loader={loader} element={<Home />} />
   )
 );
 function App() {
